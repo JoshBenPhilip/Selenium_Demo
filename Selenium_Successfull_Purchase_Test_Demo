@@ -1,0 +1,67 @@
+# Test Case
+# -----------------
+# 1. Open web browser (Chrome).
+# 2. Open URL 
+# 3. Enter username
+# 4. Enter Password 
+# 5. Click on Login
+# 6. Click to add an Item to cart
+# 7. Click Checkout
+# 8. Fill in Customer Info
+# 9. Click Continue
+# 10. Move page down
+# 11. Click Finish
+# 12. If page reached end then Test passes and prints "Test Success" to console , else Test Fails and prints "Test Failure" to console (still geting failiure to work without ending script)
+# 13. Close Web browser.
+
+
+
+import time
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+pause_time = 1.5
+
+driver=webdriver.Chrome("/Users/joshbenphilip/Drivers/chromedriver")
+
+
+driver.get("https://www.saucedemo.com/")
+
+driver.maximize_window() # For maximizing window
+time.sleep(pause_time)
+driver.find_element(By.ID,"user-name").send_keys("standard_user")
+driver.find_element(By.ID,"password").send_keys("secret_sauce")
+time.sleep(pause_time)
+driver.find_element(By.ID, "login-button").click()
+time.sleep(pause_time)
+driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
+time.sleep(pause_time)
+driver.find_element(By.ID, "shopping_cart_container").click()
+time.sleep(pause_time)
+driver.find_element(By.ID,"checkout").click()
+time.sleep(pause_time)
+driver.find_element(By.ID,"first-name").send_keys("TomTest")
+driver.find_element(By.ID,"last-name").send_keys("Testerson")
+driver.find_element(By.ID,"postal-code").send_keys("33427")
+time.sleep(pause_time)
+driver.find_element(By.ID,"continue").click()
+time.sleep(pause_time)
+driver.find_element(By.ID, "finish").send_keys("down")
+time.sleep(pause_time)
+driver.find_element(By.ID, "finish").click()
+#
+exp_result=driver.find_element(By.ID,"checkout_complete_container")
+# image_shown=driver.find_element(By.ID,"checkout_complete_container").img.src="/static/media/pony-express.46394a5d.png"
+#
+#
+#
+#
+if exp_result:
+    print ("Test Success")
+else:
+    print ("Test Failure")
+
+time.sleep(pause_time)
+driver.close()
+
